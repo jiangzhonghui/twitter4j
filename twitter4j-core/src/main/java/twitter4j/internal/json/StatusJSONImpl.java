@@ -41,6 +41,7 @@ import static twitter4j.internal.util.z_T4JInternalParseUtil.getUnescapedString;
     private static final Logger logger = Logger.getLogger(StatusJSONImpl.class);
     private static final long serialVersionUID = 7548618898682727465L;
 
+    private JSONObject _json;
     private Date createdAt;
     private long id;
     private String text;
@@ -81,6 +82,7 @@ import static twitter4j.internal.util.z_T4JInternalParseUtil.getUnescapedString;
     }
 
     private void init(JSONObject json) throws TwitterException {
+        _json = json;
         id = getLong("id", json);
         text = getUnescapedString("text", json);
         source = getUnescapedString("source", json);
@@ -405,27 +407,6 @@ import static twitter4j.internal.util.z_T4JInternalParseUtil.getUnescapedString;
 
     @Override
     public String toString() {
-        return "StatusJSONImpl{" +
-                "createdAt=" + createdAt +
-                ", id=" + id +
-                ", text='" + text + '\'' +
-                ", source='" + source + '\'' +
-                ", isTruncated=" + isTruncated +
-                ", inReplyToStatusId=" + inReplyToStatusId +
-                ", inReplyToUserId=" + inReplyToUserId +
-                ", isFavorited=" + isFavorited +
-                ", inReplyToScreenName='" + inReplyToScreenName + '\'' +
-                ", geoLocation=" + geoLocation +
-                ", place=" + place +
-                ", retweetCount=" + retweetCount +
-                ", wasRetweetedByMe=" + wasRetweetedByMe +
-                ", contributors=" + (contributorsIDs == null ? null : Arrays.asList(contributorsIDs)) +
-                ", annotations=" + annotations +
-                ", retweetedStatus=" + retweetedStatus +
-                ", userMentionEntities=" + (userMentionEntities == null ? null : Arrays.asList(userMentionEntities)) +
-                ", urlEntities=" + (urlEntities == null ? null : Arrays.asList(urlEntities)) +
-                ", hashtagEntities=" + (hashtagEntities == null ? null : Arrays.asList(hashtagEntities)) +
-                ", user=" + user +
-                '}';
+        return _json.toString();
     }
 }
